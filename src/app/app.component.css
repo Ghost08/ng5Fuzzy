@@ -1,0 +1,43 @@
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+
+.wrapper {
+  display: flex;           /* establish flex container */
+  flex-direction: column;  /* make main axis vertical */
+  justify-content: center; /* center items vertically, in this case */
+  align-items: center;   
+ 
+}
+
+.example-form {
+  padding-top: 20px;
+  
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+p{
+
+  font-weight: bold;
+}
+
+.button-row {
+  display: flex;
+  align-items:center;
+ 
+  justify-content:flex-start;
+}
+
+.button-row button{
+
+  margin-right: 5px
+
+}

@@ -1,20 +1,52 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+<div class="wrapper">
+  <mat-toolbar color="primary">
+    <span>Fuzzy Word Matching </span>
+    <span class="example-spacer"></span>        
+  </mat-toolbar>
+  <form class="example-form">
+      <mat-tab-group [selectedIndex]="selectedTab" (selectedTabChange) = "tabIndexChanged($event)" >
+        <mat-tab label="Words Collection">  
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter Word" [(ngModel)]="fuzzyWord" [ngModelOptions]="{standalone: true}"  id="fuzzyWord">
+          </mat-form-field>  
+          
+          <div class="button-row">
+              <button mat-raised-button color="accent" (click)="addWord()">Add Word</button>
+              <div *ngIf="fuzzyWordList.length>0">
+                  <button mat-raised-button color="warn" (click)="clearForm()">Clear List</button>        
+              </div>              
+          </div>
+          
+          <mat-selection-list #words>
+            <mat-list-option *ngFor="let word of fuzzyWordList">
+              {{word}}
+            </mat-list-option>
+          </mat-selection-list> 
+          
+          <!-- 
+          <p>
+            Options selected: {{words.selectedOptions.selected.length}}
+          </p>  --> 
+          
+        
+        </mat-tab>
+      
+        <mat-tab label="Fuzzy Test" >        
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Enter Word To Compare" [(ngModel)]="compareWord" [ngModelOptions]="{standalone: true}"  id="compareWord">          
+            </mat-form-field>
+            <mat-form-field class="example-full-width"> 
+              <input matInput placeholder="Enter Fuzzyness %" [(ngModel)]="fuzzyness" name="fuzzyness" type="number" min="1" max="100">
+            </mat-form-field>           
+            <button mat-raised-button color="accent" (click)="runFuzzyTest()">Run Fuzzy Test</button> 
+        </mat-tab>
+        <mat-tab label="Output">
+          <p>Matched Words :</p>
+            <mat-list>
+                <mat-list-item *ngFor="let matchWord of matchWordList"> {{matchWord}} </mat-list-item>              
+            </mat-list>
+        </mat-tab>
+    </mat-tab-group>
+  </form>
+</div>
